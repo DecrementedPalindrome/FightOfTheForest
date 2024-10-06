@@ -1,0 +1,34 @@
+[gd_resource type="Resource" script_class="LevelParameters" load_steps=10 format=3 uid="uid://pfyso2yn4x0w"]
+
+[ext_resource type="PackedScene" uid="uid://jirrf0cg6tmh" path="res://Levels/Level1Objects.tscn" id="1_apldr"]
+[ext_resource type="Script" path="res://Scripts/level_parameters.gd" id="1_evqco"]
+[ext_resource type="Curve2D" uid="uid://f7p7ep5qvhq1" path="res://Levels/Level1Curve.tres" id="1_jpj1a"]
+[ext_resource type="Script" path="res://Scripts/wave.gd" id="2_whf7q"]
+[ext_resource type="Script" path="res://Scripts/enemy_type.gd" id="4_rwoxb"]
+[ext_resource type="Resource" uid="uid://bgyrskl0x5w3i" path="res://Enemies/BasicEnemy.tres" id="5_11e4c"]
+
+[sub_resource type="Resource" id="Resource_iny3p"]
+script = ExtResource("2_whf7q")
+duration = 10
+time_between_enemies = 3.0
+enemies = Array[ExtResource("4_rwoxb")]([ExtResource("5_11e4c"), ExtResource("5_11e4c")])
+
+[sub_resource type="Resource" id="Resource_wry46"]
+script = ExtResource("2_whf7q")
+duration = 13
+time_between_enemies = 3.0
+enemies = Array[ExtResource("4_rwoxb")]([ExtResource("5_11e4c"), ExtResource("5_11e4c"), ExtResource("5_11e4c")])
+
+[sub_resource type="Resource" id="Resource_iwfkv"]
+script = ExtResource("2_whf7q")
+duration = 10
+time_between_enemies = 2.0
+enemies = Array[ExtResource("4_rwoxb")]([ExtResource("5_11e4c"), ExtResource("5_11e4c"), ExtResource("5_11e4c"), ExtResource("5_11e4c")])
+
+[resource]
+script = ExtResource("1_evqco")
+level_number = 1
+tech_level = 1
+route_curve = ExtResource("1_jpj1a")
+waves = Array[ExtResource("2_whf7q")]([SubResource("Resource_iny3p"), SubResource("Resource_wry46"), SubResource("Resource_iwfkv")])
+preexisting_objects = ExtResource("1_apldr")

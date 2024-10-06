@@ -1,0 +1,87 @@
+[gd_scene load_steps=12 format=3 uid="uid://dylbmt8dnc58h"]
+
+[ext_resource type="FontFile" uid="uid://butlmg0yfrfid" path="res://Assets/pixel.regular.ttf" id="1_xtakj"]
+[ext_resource type="Script" path="res://Scripts/grass.gd" id="2_qkjbj"]
+[ext_resource type="Texture2D" uid="uid://cfuvl7d5qgyob" path="res://Assets/Grass/GrassTuft1.png" id="3_67ndc"]
+[ext_resource type="Texture2D" uid="uid://hrbk6tnx727b" path="res://Assets/Grass/GrassTuft2.png" id="4_xeu23"]
+[ext_resource type="Texture2D" uid="uid://dx820ki46iwe3" path="res://Assets/Grass/GrassTuft3.png" id="5_g5kg2"]
+[ext_resource type="Texture2D" uid="uid://d2m3sn0lccpo5" path="res://Assets/Grass/GrassTuft4.png" id="6_25s12"]
+[ext_resource type="Texture2D" uid="uid://ejxs522v2dhb" path="res://Assets/Grass/GrassTuft5.png" id="7_i7h80"]
+[ext_resource type="Script" path="res://Scripts/Buttons/play_button.gd" id="8_gcdif"]
+[ext_resource type="PackedScene" uid="uid://vqr5jnjw7t7" path="res://Towers/BeeHiveTower.tscn" id="9_wkl0l"]
+[ext_resource type="PackedScene" uid="uid://ftr1r8eohwga" path="res://Towers/Bee.tscn" id="10_qflno"]
+
+[sub_resource type="Theme" id="Theme_bmold"]
+default_font = ExtResource("1_xtakj")
+default_font_size = 7
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+theme = SubResource("Theme_bmold")
+
+[node name="ZoomedPixelCamera" type="Camera2D" parent="."]
+offset = Vector2(180, 101)
+
+[node name="Grass" type="Node2D" parent="."]
+script = ExtResource("2_qkjbj")
+images = Array[CompressedTexture2D]([ExtResource("3_67ndc"), ExtResource("4_xeu23"), ExtResource("5_g5kg2"), ExtResource("6_25s12"), ExtResource("7_i7h80")])
+
+[node name="ColorRect" type="ColorRect" parent="Grass"]
+offset_right = 360.0
+offset_bottom = 202.0
+color = Color(0, 0.678431, 0, 0.419608)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 360.0
+offset_bottom = 202.0
+alignment = 1
+
+[node name="Spacer" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CenterContainer" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="Title" type="Label" parent="VBoxContainer/CenterContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 20
+text = "Infestation Elimination"
+
+[node name="Spacer2" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CenterContainer2" type="CenterContainer" parent="VBoxContainer"]
+layout_mode = 2
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="VBoxContainer/CenterContainer2"]
+layout_mode = 2
+ratio = 2.5
+stretch_mode = 3
+
+[node name="PlayButton" type="Button" parent="VBoxContainer/CenterContainer2/AspectRatioContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 24
+text = "Play"
+script = ExtResource("8_gcdif")
+
+[node name="Spacer3" type="Control" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="BeeHiveTower" parent="." instance=ExtResource("9_wkl0l")]
+position = Vector2(47, 87)
+
+[node name="BeeHiveTower2" parent="." instance=ExtResource("9_wkl0l")]
+position = Vector2(294, 136)
+
+[node name="Bee" parent="." instance=ExtResource("10_qflno")]
+position = Vector2(62, 140)
+
+[node name="Bee2" parent="." instance=ExtResource("10_qflno")]
+position = Vector2(251, 86)
+
+[connection signal="pressed" from="VBoxContainer/CenterContainer2/AspectRatioContainer/PlayButton" to="VBoxContainer/CenterContainer2/AspectRatioContainer/PlayButton" method="_on_pressed"]

@@ -1,0 +1,253 @@
+[gd_scene load_steps=31 format=3 uid="uid://rhc8r8k3phtx"]
+
+[ext_resource type="Script" path="res://Scripts/game.gd" id="1_2f3gw"]
+[ext_resource type="PackedScene" uid="uid://dhtw75i4xncce" path="res://Enemies/Enemy.tscn" id="2_24fmy"]
+[ext_resource type="PackedScene" uid="uid://vqr5jnjw7t7" path="res://Towers/BeeHiveTower.tscn" id="3_0fq70"]
+[ext_resource type="Script" path="res://Scripts/grass.gd" id="3_jp0yb"]
+[ext_resource type="Texture2D" uid="uid://vyajy3xkbcop" path="res://Assets/Biomass.png" id="4_immep"]
+[ext_resource type="Texture2D" uid="uid://cfuvl7d5qgyob" path="res://Assets/Grass/GrassTuft1.png" id="4_qgfu4"]
+[ext_resource type="Texture2D" uid="uid://hrbk6tnx727b" path="res://Assets/Grass/GrassTuft2.png" id="5_lg3ij"]
+[ext_resource type="Script" path="res://Scripts/biomass_counter.gd" id="5_rm0au"]
+[ext_resource type="FontFile" uid="uid://butlmg0yfrfid" path="res://Assets/pixel.regular.ttf" id="5_ytsd7"]
+[ext_resource type="Texture2D" uid="uid://dx820ki46iwe3" path="res://Assets/Grass/GrassTuft3.png" id="6_fy58n"]
+[ext_resource type="Script" path="res://Scripts/lives_counter.gd" id="7_as8ec"]
+[ext_resource type="Texture2D" uid="uid://c1ph4dvwrl4a4" path="res://Assets/Heart.png" id="7_idxpk"]
+[ext_resource type="Texture2D" uid="uid://d2m3sn0lccpo5" path="res://Assets/Grass/GrassTuft4.png" id="7_qpy40"]
+[ext_resource type="Texture2D" uid="uid://ejxs522v2dhb" path="res://Assets/Grass/GrassTuft5.png" id="8_8f6oj"]
+[ext_resource type="Curve2D" uid="uid://f7p7ep5qvhq1" path="res://Levels/Level1Curve.tres" id="9_me6ry"]
+[ext_resource type="Script" path="res://path.gd" id="9_obxno"]
+[ext_resource type="Texture2D" uid="uid://bru68tu34mhli" path="res://Assets/Rocks/Rock1.png" id="10_4wd0j"]
+[ext_resource type="Texture2D" uid="uid://6lc2kpvmmje0" path="res://Assets/Rocks/Rock2.png" id="11_pryba"]
+[ext_resource type="Texture2D" uid="uid://ks3tuci2502t" path="res://Assets/Rocks/Rock3.png" id="12_xolu8"]
+[ext_resource type="Texture2D" uid="uid://bwb06s57nyhmp" path="res://Assets/Rocks/Rock4.png" id="13_najxh"]
+[ext_resource type="Texture2D" uid="uid://djfkinnj8ntmb" path="res://Assets/Rocks/Rock5.png" id="14_2vyy2"]
+[ext_resource type="Script" path="res://Scripts/flowers_setup.gd" id="16_5ia37"]
+[ext_resource type="Script" path="res://Scripts/towers_setup.gd" id="17_qqk25"]
+[ext_resource type="Script" path="res://Scripts/Buttons/bee_hive_button.gd" id="21_21784"]
+[ext_resource type="Texture2D" uid="uid://brlpbpjsqwj4v" path="res://Assets/BeeHive.png" id="21_i3w12"]
+[ext_resource type="Script" path="res://Scripts/cursor_control.gd" id="22_qs6xi"]
+[ext_resource type="Script" path="res://Scripts/Buttons/ant_hill_button.gd" id="25_pk57c"]
+[ext_resource type="AudioStream" uid="uid://doh20bxljeu23" path="res://Assets/FightOfTheForest.mp3" id="28_7sugg"]
+
+[sub_resource type="Theme" id="Theme_odu67"]
+default_font = ExtResource("5_ytsd7")
+default_font_size = 7
+
+[sub_resource type="LabelSettings" id="LabelSettings_bfjbb"]
+font = ExtResource("5_ytsd7")
+font_size = 7
+
+[node name="Game" type="Node2D" node_paths=PackedStringArray("route")]
+script = ExtResource("1_2f3gw")
+route = NodePath("Route")
+enemy = ExtResource("2_24fmy")
+
+[node name="ZoomedPixelCamera" type="Camera2D" parent="."]
+offset = Vector2(180, 101)
+
+[node name="Grass" type="Node2D" parent="."]
+script = ExtResource("3_jp0yb")
+images = Array[CompressedTexture2D]([ExtResource("4_qgfu4"), ExtResource("5_lg3ij"), ExtResource("6_fy58n"), ExtResource("7_qpy40"), ExtResource("8_8f6oj")])
+
+[node name="ColorRect" type="ColorRect" parent="Grass"]
+offset_right = 360.0
+offset_bottom = 202.0
+mouse_filter = 2
+color = Color(0, 0.678431, 0, 0.419608)
+
+[node name="Route" type="Path2D" parent="."]
+curve = ExtResource("9_me6ry")
+script = ExtResource("9_obxno")
+images = Array[CompressedTexture2D]([ExtResource("10_4wd0j"), ExtResource("11_pryba"), ExtResource("12_xolu8"), ExtResource("13_najxh"), ExtResource("14_2vyy2")])
+
+[node name="SpawnTimer" type="Timer" parent="."]
+
+[node name="WaveTimer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+
+[node name="Flowers" type="Node2D" parent="."]
+script = ExtResource("16_5ia37")
+
+[node name="Towers" type="Node2D" parent="."]
+script = ExtResource("17_qqk25")
+
+[node name="CursorControl" type="Sprite2D" parent="."]
+script = ExtResource("22_qs6xi")
+beehive = ExtResource("21_i3w12")
+beehive_tower = ExtResource("3_0fq70")
+
+[node name="HUD" type="CanvasLayer" parent="."]
+
+[node name="Control" type="Control" parent="HUD"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_odu67")
+
+[node name="BiomassIcon" type="TextureRect" parent="HUD/Control"]
+layout_mode = 0
+offset_left = 6.0
+offset_right = 46.0
+offset_bottom = 40.0
+texture = ExtResource("4_immep")
+stretch_mode = 2
+script = ExtResource("5_rm0au")
+
+[node name="BiomassLabel" type="Label" parent="HUD/Control/BiomassIcon"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 4.0
+offset_right = 56.0
+offset_bottom = 14.0
+text = "10"
+label_settings = SubResource("LabelSettings_bfjbb")
+vertical_alignment = 1
+
+[node name="LivesIcon" type="TextureRect" parent="HUD/Control"]
+layout_mode = 0
+offset_left = 44.0
+offset_right = 84.0
+offset_bottom = 40.0
+texture = ExtResource("7_idxpk")
+stretch_mode = 2
+script = ExtResource("7_as8ec")
+
+[node name="LivesLabel" type="Label" parent="HUD/Control/LivesIcon"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 4.0
+offset_right = 56.0
+offset_bottom = 14.0
+text = "10"
+label_settings = SubResource("LabelSettings_bfjbb")
+vertical_alignment = 1
+
+[node name="StructurePanel" type="Panel" parent="HUD/Control"]
+layout_mode = 0
+offset_top = 162.0
+offset_right = 360.0
+offset_bottom = 202.0
+
+[node name="MarginContainer" type="MarginContainer" parent="HUD/Control/StructurePanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 5
+theme_override_constants/margin_right = 5
+theme_override_constants/margin_bottom = 5
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HUD/Control/StructurePanel/MarginContainer"]
+layout_mode = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="HUD/Control/StructurePanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+
+[node name="BeeHiveButton" type="Button" parent="HUD/Control/StructurePanel/MarginContainer/HBoxContainer/PanelContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("21_21784")
+
+[node name="Label" type="Label" parent="HUD/Control/StructurePanel/MarginContainer/HBoxContainer/PanelContainer/BeeHiveButton"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 5.0
+offset_right = 67.0
+offset_bottom = 15.0
+text = "Beehive"
+
+[node name="TextureRect" type="TextureRect" parent="HUD/Control/StructurePanel/MarginContainer/HBoxContainer/PanelContainer/BeeHiveButton"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 8.0
+offset_right = 20.0
+offset_bottom = 24.0
+texture = ExtResource("21_i3w12")
+stretch_mode = 2
+
+[node name="Cost" type="Control" parent="HUD/Control/StructurePanel/MarginContainer/HBoxContainer/PanelContainer/BeeHiveButton"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BiomassIcon" type="TextureRect" parent="HUD/Control/StructurePanel/MarginContainer/HBoxContainer/PanelContainer/BeeHiveButton/Cost"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 14.0
+offset_right = 64.0
+offset_bottom = 54.0
+texture = ExtResource("4_immep")
+stretch_mode = 2
+
+[node name="BiomassLabel" type="Label" parent="HUD/Control/StructurePanel/MarginContainer/HBoxContainer/PanelContainer/BeeHiveButton/Cost/BiomassIcon"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 4.0
+offset_right = 56.0
+offset_bottom = 14.0
+text = "10"
+label_settings = SubResource("LabelSettings_bfjbb")
+vertical_alignment = 1
+
+[node name="PanelContainer2" type="PanelContainer" parent="HUD/Control/StructurePanel/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(75, 0)
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AntHillButton2" type="Button" parent="HUD/Control/StructurePanel/MarginContainer/HBoxContainer/PanelContainer2"]
+layout_mode = 2
+size_flags_horizontal = 3
+script = ExtResource("25_pk57c")
+
+[node name="Label" type="Label" parent="HUD/Control/StructurePanel/MarginContainer/HBoxContainer/PanelContainer2/AntHillButton2"]
+layout_mode = 0
+offset_left = 27.0
+offset_top = 5.0
+offset_right = 67.0
+offset_bottom = 15.0
+text = "Anthill"
+
+[node name="TextureRect" type="TextureRect" parent="HUD/Control/StructurePanel/MarginContainer/HBoxContainer/PanelContainer2/AntHillButton2"]
+layout_mode = 0
+offset_left = 4.0
+offset_top = 8.0
+offset_right = 20.0
+offset_bottom = 24.0
+texture = ExtResource("21_i3w12")
+stretch_mode = 2
+
+[node name="Cost" type="Control" parent="HUD/Control/StructurePanel/MarginContainer/HBoxContainer/PanelContainer2/AntHillButton2"]
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BiomassIcon" type="TextureRect" parent="HUD/Control/StructurePanel/MarginContainer/HBoxContainer/PanelContainer2/AntHillButton2/Cost"]
+layout_mode = 0
+offset_left = 24.0
+offset_top = 14.0
+offset_right = 64.0
+offset_bottom = 54.0
+texture = ExtResource("4_immep")
+stretch_mode = 2
+
+[node name="BiomassLabel" type="Label" parent="HUD/Control/StructurePanel/MarginContainer/HBoxContainer/PanelContainer2/AntHillButton2/Cost/BiomassIcon"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 4.0
+offset_right = 56.0
+offset_bottom = 14.0
+text = "10"
+label_settings = SubResource("LabelSettings_bfjbb")
+vertical_alignment = 1
+
+[node name="Music" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("28_7sugg")
+volume_db = -10.0
+autoplay = true
+
+[connection signal="timeout" from="SpawnTimer" to="." method="_on_spawn_timer_timeout"]
+[connection signal="timeout" from="WaveTimer" to="." method="_on_wave_timer_timeout"]
+[connection signal="pressed" from="HUD/Control/StructurePanel/MarginContainer/HBoxContainer/PanelContainer/BeeHiveButton" to="CursorControl" method="_on_bee_hive_button_pressed"]

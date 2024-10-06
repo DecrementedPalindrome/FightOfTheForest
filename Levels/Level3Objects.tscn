@@ -1,0 +1,80 @@
+[gd_scene load_steps=9 format=3 uid="uid://dsvgf8hdg7lu1"]
+
+[ext_resource type="Curve2D" uid="uid://cei80hgnyc7gn" path="res://Levels/Level3Curve.tres" id="1_0on3i"]
+[ext_resource type="PackedScene" uid="uid://vqr5jnjw7t7" path="res://Towers/BeeHiveTower.tscn" id="2_qa65e"]
+[ext_resource type="PackedScene" uid="uid://bqy8lc6taaxrl" path="res://Towers/Sunflower.tscn" id="3_torlj"]
+[ext_resource type="PackedScene" uid="uid://c4pgyrvvc8j6v" path="res://Towers/AntHillTower.tscn" id="4_xw40d"]
+[ext_resource type="FontFile" uid="uid://butlmg0yfrfid" path="res://Assets/pixel.regular.ttf" id="5_yrk4g"]
+[ext_resource type="Script" path="res://Scripts/close_guide_button.gd" id="6_ivr3k"]
+[ext_resource type="Texture2D" uid="uid://c1cgnfsu7al5f" path="res://Assets/AntHill.png" id="7_5dxsv"]
+
+[sub_resource type="Theme" id="Theme_wrayl"]
+default_font = ExtResource("5_yrk4g")
+default_font_size = 7
+
+[node name="Level2Objects" type="Node2D"]
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = ExtResource("1_0on3i")
+
+[node name="Towers" type="Node2D" parent="."]
+
+[node name="BeeHiveTower" parent="Towers" instance=ExtResource("2_qa65e")]
+position = Vector2(293, 129)
+
+[node name="AntHillTower" parent="Towers" instance=ExtResource("4_xw40d")]
+position = Vector2(275, 114)
+
+[node name="Flowers" type="Node2D" parent="."]
+
+[node name="Sunflower" parent="Flowers" instance=ExtResource("3_torlj")]
+position = Vector2(214, 105)
+
+[node name="Guide" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_wrayl")
+
+[node name="Panel" type="Panel" parent="Guide"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 40.0
+offset_right = 310.0
+offset_bottom = 122.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Guide/Panel"]
+layout_mode = 0
+offset_right = 260.0
+offset_bottom = 82.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Guide/Panel/MarginContainer"]
+layout_mode = 2
+text = "Ants eat flowers in order to reproduce! But don't worry, they have a habit of dropping the seeds on the way back so you may end up with even more flowers around the       Anthill than there were before.
+Ants are slow but do more damage."
+scroll_active = false
+
+[node name="CloseGuideButton" type="Button" parent="Guide/Panel"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 57.0
+offset_right = 250.0
+offset_bottom = 75.0
+text = "Close"
+script = ExtResource("6_ivr3k")
+
+[node name="BeehiveIcon" type="TextureRect" parent="Guide/Panel"]
+layout_mode = 0
+offset_left = 101.0
+offset_top = 37.0
+offset_right = 117.0
+offset_bottom = 53.0
+texture = ExtResource("7_5dxsv")
+stretch_mode = 2
+
+[connection signal="pressed" from="Guide/Panel/CloseGuideButton" to="Guide/Panel/CloseGuideButton" method="_on_pressed"]

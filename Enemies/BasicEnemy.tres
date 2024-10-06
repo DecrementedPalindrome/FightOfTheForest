@@ -1,0 +1,12 @@
+[gd_resource type="Resource" script_class="EnemyType" load_steps=4 format=3 uid="uid://bgyrskl0x5w3i"]
+
+[ext_resource type="Script" path="res://Scripts/enemy_type.gd" id="1_pfebh"]
+[ext_resource type="Texture2D" uid="uid://bbir6txof2sbb" path="res://Assets/Enemies/Basic.png" id="2_jv7a7"]
+[ext_resource type="Texture2D" uid="uid://dta0dd4mb2kx3" path="res://Assets/Enemies/Basic1.png" id="3_synjb"]
+
+[resource]
+script = ExtResource("1_pfebh")
+health = 10
+speed = 10.0
+reward = 1
+walking_frames = Array[CompressedTexture2D]([ExtResource("2_jv7a7"), ExtResource("3_synjb")])

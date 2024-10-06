@@ -1,0 +1,117 @@
+[gd_scene load_steps=9 format=3 uid="uid://y05ikjx1mvvf"]
+
+[ext_resource type="Curve2D" uid="uid://ldj0hrlojwy6" path="res://Levels/Level2Curve.tres" id="1_i5lku"]
+[ext_resource type="PackedScene" uid="uid://vqr5jnjw7t7" path="res://Towers/BeeHiveTower.tscn" id="2_63jei"]
+[ext_resource type="PackedScene" uid="uid://bqy8lc6taaxrl" path="res://Towers/Sunflower.tscn" id="2_ttpxx"]
+[ext_resource type="FontFile" uid="uid://butlmg0yfrfid" path="res://Assets/pixel.regular.ttf" id="4_va4u4"]
+[ext_resource type="Script" path="res://Scripts/close_guide_button.gd" id="5_538oc"]
+[ext_resource type="Script" path="res://Scripts/next_button.gd" id="5_t2wh8"]
+[ext_resource type="Texture2D" uid="uid://bg66nnf8odm2a" path="res://Assets/Sunflower.png" id="6_3mmrd"]
+
+[sub_resource type="Theme" id="Theme_ixxhf"]
+default_font = ExtResource("4_va4u4")
+default_font_size = 7
+
+[node name="Level2Objects" type="Node2D"]
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = ExtResource("1_i5lku")
+
+[node name="Towers" type="Node2D" parent="."]
+
+[node name="BeeHiveTower" parent="Towers" instance=ExtResource("2_63jei")]
+position = Vector2(307, 92)
+
+[node name="Flowers" type="Node2D" parent="."]
+
+[node name="Sunflower" parent="Flowers" instance=ExtResource("2_ttpxx")]
+position = Vector2(306, 30)
+
+[node name="Sunflower2" parent="Flowers" instance=ExtResource("2_ttpxx")]
+position = Vector2(318, 49)
+
+[node name="Sunflower3" parent="Flowers" instance=ExtResource("2_ttpxx")]
+position = Vector2(294, 49)
+
+[node name="Guide" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_ixxhf")
+
+[node name="Panel" type="Panel" parent="Guide"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 40.0
+offset_right = 310.0
+offset_bottom = 122.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Guide/Panel"]
+layout_mode = 0
+offset_right = 260.0
+offset_bottom = 82.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Guide/Panel/MarginContainer"]
+layout_mode = 2
+text = "Bees can collect honey from     Flowers and deliver it to the hive. If enough honey is collected a new bee will appear!
+Bees won't collect honey if there are enemies nearby, protecting the hive is their
+top priority."
+scroll_active = false
+
+[node name="NextButton" type="Button" parent="Guide/Panel"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 57.0
+offset_right = 250.0
+offset_bottom = 75.0
+text = "Next"
+script = ExtResource("5_t2wh8")
+
+[node name="FlowerIcon" type="TextureRect" parent="Guide/Panel"]
+layout_mode = 0
+offset_left = 142.0
+offset_top = 7.0
+offset_right = 158.0
+offset_bottom = 23.0
+texture = ExtResource("6_3mmrd")
+stretch_mode = 2
+
+[node name="Panel2" type="Panel" parent="Guide"]
+visible = false
+layout_mode = 0
+offset_left = 50.0
+offset_top = 40.0
+offset_right = 310.0
+offset_bottom = 122.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Guide/Panel2"]
+layout_mode = 0
+offset_right = 260.0
+offset_bottom = 82.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Guide/Panel2/MarginContainer"]
+layout_mode = 2
+text = "You can move bees between hives by clicking the hive you want to move from and then clicking the hive you want to move to.
+Make sure your bees are where thay are needed!"
+scroll_active = false
+
+[node name="CloseGuideButton" type="Button" parent="Guide/Panel2"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 57.0
+offset_right = 250.0
+offset_bottom = 75.0
+text = "Close"
+script = ExtResource("5_538oc")
+
+[connection signal="pressed" from="Guide/Panel/NextButton" to="Guide/Panel/NextButton" method="_on_pressed"]
+[connection signal="pressed" from="Guide/Panel2/CloseGuideButton" to="Guide/Panel2/CloseGuideButton" method="_on_pressed"]

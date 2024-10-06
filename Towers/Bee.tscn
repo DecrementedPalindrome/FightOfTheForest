@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://ftr1r8eohwga"]
+
+[ext_resource type="Script" path="res://Towers/bee.gd" id="1_hojau"]
+[ext_resource type="Texture2D" uid="uid://8imsb1oy65fv" path="res://Assets/Bee.png" id="2_mwatj"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t8hpk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vlade"]
+
+[node name="Bee" type="Node2D"]
+script = ExtResource("1_hojau")
+
+[node name="EnemyCollision" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCollision"]
+visible = false
+scale = Vector2(0.2, 0.2)
+shape = SubResource("CircleShape2D_t8hpk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_mwatj")
+
+[node name="FlowerCollision" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlowerCollision"]
+visible = false
+scale = Vector2(0.2, 0.2)
+shape = SubResource("CircleShape2D_t8hpk")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 8
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+scale = Vector2(0.2, 0.2)
+shape = SubResource("CircleShape2D_vlade")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]

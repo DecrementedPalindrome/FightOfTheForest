@@ -1,0 +1,80 @@
+[gd_scene load_steps=7 format=3 uid="uid://jirrf0cg6tmh"]
+
+[ext_resource type="Curve2D" uid="uid://f7p7ep5qvhq1" path="res://Levels/Level1Curve.tres" id="1_qlwrm"]
+[ext_resource type="FontFile" uid="uid://butlmg0yfrfid" path="res://Assets/pixel.regular.ttf" id="2_wqpwh"]
+[ext_resource type="Script" path="res://Scripts/close_guide_button.gd" id="3_bl0ii"]
+[ext_resource type="Texture2D" uid="uid://brlpbpjsqwj4v" path="res://Assets/BeeHive.png" id="4_rjb2g"]
+[ext_resource type="Texture2D" uid="uid://vyajy3xkbcop" path="res://Assets/Biomass.png" id="5_p3kds"]
+
+[sub_resource type="Theme" id="Theme_84sn1"]
+default_font = ExtResource("2_wqpwh")
+default_font_size = 7
+
+[node name="Level2Objects" type="Node2D"]
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = ExtResource("1_qlwrm")
+
+[node name="Towers" type="Node2D" parent="."]
+
+[node name="Flowers" type="Node2D" parent="."]
+
+[node name="Guide" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_84sn1")
+
+[node name="Panel" type="Panel" parent="Guide"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 40.0
+offset_right = 310.0
+offset_bottom = 122.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Guide/Panel"]
+layout_mode = 0
+offset_right = 260.0
+offset_bottom = 82.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Guide/Panel/MarginContainer"]
+layout_mode = 2
+text = "Evil mutant mushrooms are attacking the peaceful forest! Thankfully the forest creatures are ready to help defend.
+
+Place         Beehives using         Biomass 
+and the bees will attack nearby  invaders"
+scroll_active = false
+
+[node name="CloseGuideButton" type="Button" parent="Guide/Panel"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 57.0
+offset_right = 250.0
+offset_bottom = 75.0
+text = "Close"
+script = ExtResource("3_bl0ii")
+
+[node name="BeehiveIcon" type="TextureRect" parent="Guide/Panel"]
+layout_mode = 0
+offset_left = 38.0
+offset_top = 43.0
+offset_right = 54.0
+offset_bottom = 59.0
+texture = ExtResource("4_rjb2g")
+stretch_mode = 2
+
+[node name="BiomassIcon" type="TextureRect" parent="Guide/Panel"]
+layout_mode = 0
+offset_left = 133.0
+offset_top = 45.0
+offset_right = 149.0
+offset_bottom = 61.0
+texture = ExtResource("5_p3kds")
+stretch_mode = 2
+
+[connection signal="pressed" from="Guide/Panel/CloseGuideButton" to="Guide/Panel/CloseGuideButton" method="_on_pressed"]

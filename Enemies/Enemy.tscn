@@ -1,0 +1,70 @@
+[gd_scene load_steps=12 format=3 uid="uid://dhtw75i4xncce"]
+
+[ext_resource type="Script" path="res://Enemies/enemy.gd" id="1_7hy3e"]
+[ext_resource type="AudioStream" uid="uid://o0wdjollksn2" path="res://Assets/hehehe1.ogg" id="2_die7f"]
+[ext_resource type="AudioStream" uid="uid://1mcv1kogibs0" path="res://Assets/hehehe2.ogg" id="3_4t6uj"]
+[ext_resource type="AudioStream" uid="uid://dfsn4w0pmakf6" path="res://Assets/hehehe3.ogg" id="4_7xnyr"]
+[ext_resource type="AudioStream" uid="uid://bapjn0ftwro2x" path="res://Assets/hehehe4.ogg" id="5_37jra"]
+[ext_resource type="AudioStream" uid="uid://biufvdl6hafga" path="res://Assets/hehehe5.ogg" id="6_irqw1"]
+[ext_resource type="AudioStream" uid="uid://crarwp2iu40r1" path="res://Assets/hehehe6.ogg" id="7_6wrxt"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_ognw6"]
+
+[sub_resource type="Gradient" id="Gradient_py6xd"]
+colors = PackedColorArray(1, 0, 0, 1, 1, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_4qa54"]
+gradient = SubResource("Gradient_py6xd")
+width = 15
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_ayyvo"]
+
+[node name="Enemy" type="PathFollow2D"]
+loop = false
+script = ExtResource("1_7hy3e")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+sprite_frames = SubResource("SpriteFrames_ognw6")
+
+[node name="HealthBar" type="TextureProgressBar" parent="."]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -7.0
+offset_top = -10.0
+offset_right = 249.0
+offset_bottom = 30.0
+grow_horizontal = 2
+grow_vertical = 2
+value = 100.0
+fill_mode = 6
+texture_progress = SubResource("GradientTexture1D_4qa54")
+
+[node name="CollisionArea" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CollisionArea"]
+scale = Vector2(0.7, 0.7)
+shape = SubResource("CircleShape2D_ayyvo")
+
+[node name="LaughPlayers" type="Node2D" parent="."]
+
+[node name="Hehehe1" type="AudioStreamPlayer" parent="LaughPlayers"]
+stream = ExtResource("2_die7f")
+
+[node name="Hehehe2" type="AudioStreamPlayer" parent="LaughPlayers"]
+stream = ExtResource("3_4t6uj")
+
+[node name="Hehehe3" type="AudioStreamPlayer" parent="LaughPlayers"]
+stream = ExtResource("4_7xnyr")
+
+[node name="Hehehe4" type="AudioStreamPlayer" parent="LaughPlayers"]
+stream = ExtResource("5_37jra")
+
+[node name="Hehehe5" type="AudioStreamPlayer" parent="LaughPlayers"]
+stream = ExtResource("6_irqw1")
+
+[node name="Hehehe6" type="AudioStreamPlayer" parent="LaughPlayers"]
+stream = ExtResource("7_6wrxt")

@@ -1,0 +1,73 @@
+[gd_scene load_steps=7 format=3 uid="uid://cf0s6b10rshlc"]
+
+[ext_resource type="Curve2D" uid="uid://c1d0pmdrrlckw" path="res://Levels/Level4Curve.tres" id="1_ynqlk"]
+[ext_resource type="PackedScene" uid="uid://vqr5jnjw7t7" path="res://Towers/BeeHiveTower.tscn" id="2_qa65e"]
+[ext_resource type="PackedScene" uid="uid://bqy8lc6taaxrl" path="res://Towers/Sunflower.tscn" id="3_torlj"]
+[ext_resource type="FontFile" uid="uid://butlmg0yfrfid" path="res://Assets/pixel.regular.ttf" id="4_ensbf"]
+[ext_resource type="Script" path="res://Scripts/close_guide_button.gd" id="5_3nsxw"]
+
+[sub_resource type="Theme" id="Theme_cn57y"]
+default_font = ExtResource("4_ensbf")
+default_font_size = 7
+
+[node name="Level4Objects" type="Node2D"]
+
+[node name="Path2D" type="Path2D" parent="."]
+curve = ExtResource("1_ynqlk")
+
+[node name="Towers" type="Node2D" parent="."]
+
+[node name="BeeHiveTower" parent="Towers" instance=ExtResource("2_qa65e")]
+position = Vector2(330, 75)
+
+[node name="BeeHiveTower2" parent="Towers" instance=ExtResource("2_qa65e")]
+position = Vector2(330, 125)
+
+[node name="Flowers" type="Node2D" parent="."]
+
+[node name="Sunflower" parent="Flowers" instance=ExtResource("3_torlj")]
+position = Vector2(332, 178)
+
+[node name="Sunflower2" parent="Flowers" instance=ExtResource("3_torlj")]
+position = Vector2(328, 38)
+
+[node name="Guide" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+theme = SubResource("Theme_cn57y")
+
+[node name="Panel" type="Panel" parent="Guide"]
+layout_mode = 0
+offset_left = 50.0
+offset_top = 40.0
+offset_right = 310.0
+offset_bottom = 122.0
+
+[node name="MarginContainer" type="MarginContainer" parent="Guide/Panel"]
+layout_mode = 0
+offset_right = 260.0
+offset_bottom = 82.0
+theme_override_constants/margin_left = 10
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 10
+theme_override_constants/margin_bottom = 10
+
+[node name="RichTextLabel" type="RichTextLabel" parent="Guide/Panel/MarginContainer"]
+layout_mode = 2
+text = "You're on your own for this one!
+
+Be careful, I hear there's a big group of mushroom creatures just a few minutes from here."
+scroll_active = false
+
+[node name="CloseGuideButton" type="Button" parent="Guide/Panel"]
+layout_mode = 0
+offset_left = 208.0
+offset_top = 57.0
+offset_right = 250.0
+offset_bottom = 75.0
+text = "Close"
+script = ExtResource("5_3nsxw")
+
+[connection signal="pressed" from="Guide/Panel/CloseGuideButton" to="Guide/Panel/CloseGuideButton" method="_on_pressed"]

@@ -1,0 +1,88 @@
+[gd_scene load_steps=13 format=3 uid="uid://c4pgyrvvc8j6v"]
+
+[ext_resource type="Script" path="res://Towers/ant_hill_tower.gd" id="1_s7b2n"]
+[ext_resource type="PackedScene" uid="uid://cmu676nbc01x6" path="res://Towers/Ant.tscn" id="2_hihhy"]
+[ext_resource type="Texture2D" uid="uid://c1cgnfsu7al5f" path="res://Assets/AntHill.png" id="3_83533"]
+[ext_resource type="Script" path="res://Towers/range_display.gd" id="4_l58we"]
+[ext_resource type="Script" path="res://Towers/bee_display.gd" id="5_l0vhk"]
+[ext_resource type="AudioStream" uid="uid://bu7kd47jtorj6" path="res://Assets/pop.ogg" id="6_sfub4"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5c8lx"]
+radius = 70.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_2nktr"]
+radius = 70.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_5bdbk"]
+radius = 8.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6fvks"]
+radius = 7.0
+
+[sub_resource type="Gradient" id="Gradient_u0qmv"]
+colors = PackedColorArray(0.031, 0.31, 0.0589, 1, 0.0313726, 0.309804, 0.0588235, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_moh6y"]
+gradient = SubResource("Gradient_u0qmv")
+width = 16
+
+[node name="AntHillTower" type="Node2D"]
+script = ExtResource("1_s7b2n")
+ant = ExtResource("2_hihhy")
+
+[node name="EnemyRange" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyRange"]
+shape = SubResource("CircleShape2D_5c8lx")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("3_83533")
+
+[node name="FlowerRange" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlowerRange"]
+shape = SubResource("CircleShape2D_2nktr")
+debug_color = Color(0.603671, 0.541, 0.0749113, 0.42)
+
+[node name="AntRange" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 16
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AntRange"]
+shape = SubResource("CircleShape2D_5bdbk")
+debug_color = Color(0.757528, 0.453297, 0.0666103, 0.42)
+
+[node name="MouseDetection" type="Area2D" parent="."]
+collision_layer = 32768
+collision_mask = 32768
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="MouseDetection"]
+shape = SubResource("CircleShape2D_6fvks")
+
+[node name="RangeDisplay" type="Polygon2D" parent="MouseDetection"]
+visible = false
+color = Color(0.603922, 0.541176, 0.0745098, 0.419608)
+script = ExtResource("4_l58we")
+
+[node name="BeeDisplay" type="Node2D" parent="MouseDetection"]
+script = ExtResource("5_l0vhk")
+
+[node name="NectarProgress" type="TextureProgressBar" parent="."]
+offset_left = 9.0
+offset_top = -5.0
+offset_right = 10.0
+offset_bottom = 7.0
+value = 100.0
+fill_mode = 3
+nine_patch_stretch = true
+texture_progress = SubResource("GradientTexture1D_moh6y")
+
+[node name="Pop" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_sfub4")
+
+[connection signal="input_event" from="MouseDetection" to="." method="_on_mouse_detection_input_event"]
+[connection signal="mouse_entered" from="MouseDetection" to="MouseDetection/RangeDisplay" method="_on_mouse_detection_mouse_entered"]
+[connection signal="mouse_exited" from="MouseDetection" to="MouseDetection/RangeDisplay" method="_on_mouse_detection_mouse_exited"]

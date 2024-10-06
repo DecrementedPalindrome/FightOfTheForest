@@ -1,0 +1,83 @@
+[gd_resource type="Resource" script_class="LevelParameters" load_steps=19 format=3 uid="uid://clovi8hw7tdl1"]
+
+[ext_resource type="Curve2D" uid="uid://ldj0hrlojwy6" path="res://Levels/Level2Curve.tres" id="1_6rqki"]
+[ext_resource type="PackedScene" uid="uid://y05ikjx1mvvf" path="res://Levels/Level2Objects.tscn" id="1_ytsnk"]
+[ext_resource type="Script" path="res://Scripts/level_parameters.gd" id="2_ael42"]
+[ext_resource type="Script" path="res://Scripts/wave.gd" id="3_plf6x"]
+[ext_resource type="Script" path="res://Scripts/enemy_type.gd" id="4_cj4wk"]
+[ext_resource type="Resource" uid="uid://bgyrskl0x5w3i" path="res://Enemies/BasicEnemy.tres" id="5_htdqv"]
+[ext_resource type="Resource" uid="uid://de8xf2sn3rqff" path="res://Enemies/NormalEnemy.tres" id="7_kw5d7"]
+
+[sub_resource type="Resource" id="Resource_iny3p"]
+script = ExtResource("3_plf6x")
+duration = 5
+time_between_enemies = 1.0
+enemies = Array[ExtResource("4_cj4wk")]([ExtResource("5_htdqv")])
+
+[sub_resource type="Resource" id="Resource_wry46"]
+script = ExtResource("3_plf6x")
+duration = 5
+time_between_enemies = 1.2
+enemies = Array[ExtResource("4_cj4wk")]([ExtResource("5_htdqv"), ExtResource("5_htdqv")])
+
+[sub_resource type="Resource" id="Resource_xlm8q"]
+script = ExtResource("3_plf6x")
+duration = 10
+time_between_enemies = 1.2
+enemies = Array[ExtResource("4_cj4wk")]([ExtResource("5_htdqv"), ExtResource("5_htdqv"), ExtResource("5_htdqv")])
+
+[sub_resource type="Resource" id="Resource_1q4wx"]
+script = ExtResource("3_plf6x")
+duration = 10
+time_between_enemies = 1.2
+enemies = Array[ExtResource("4_cj4wk")]([ExtResource("5_htdqv"), ExtResource("5_htdqv"), ExtResource("5_htdqv"), ExtResource("5_htdqv")])
+
+[sub_resource type="Resource" id="Resource_edu6g"]
+script = ExtResource("3_plf6x")
+duration = 12
+time_between_enemies = 2.0
+enemies = Array[ExtResource("4_cj4wk")]([ExtResource("5_htdqv"), ExtResource("5_htdqv"), ExtResource("5_htdqv"), ExtResource("5_htdqv"), ExtResource("5_htdqv")])
+
+[sub_resource type="Resource" id="Resource_rac6l"]
+script = ExtResource("3_plf6x")
+duration = 10
+time_between_enemies = 0.8
+enemies = Array[ExtResource("4_cj4wk")]([ExtResource("5_htdqv"), ExtResource("5_htdqv"), ExtResource("5_htdqv"), ExtResource("5_htdqv"), ExtResource("5_htdqv")])
+
+[sub_resource type="Resource" id="Resource_i1plo"]
+script = ExtResource("3_plf6x")
+duration = 10
+time_between_enemies = 1.2
+enemies = Array[ExtResource("4_cj4wk")]([ExtResource("5_htdqv"), ExtResource("5_htdqv"), ExtResource("5_htdqv"), ExtResource("5_htdqv"), ExtResource("5_htdqv"), ExtResource("5_htdqv")])
+
+[sub_resource type="Resource" id="Resource_7rwmn"]
+script = ExtResource("3_plf6x")
+duration = 10
+time_between_enemies = 1.0
+enemies = Array[ExtResource("4_cj4wk")]([ExtResource("5_htdqv")])
+
+[sub_resource type="Resource" id="Resource_6ugbp"]
+script = ExtResource("3_plf6x")
+duration = 10
+time_between_enemies = 1.5
+enemies = Array[ExtResource("4_cj4wk")]([ExtResource("5_htdqv"), ExtResource("5_htdqv"), ExtResource("7_kw5d7"), ExtResource("7_kw5d7")])
+
+[sub_resource type="Resource" id="Resource_dlptq"]
+script = ExtResource("3_plf6x")
+duration = 10
+time_between_enemies = 1.5
+enemies = Array[ExtResource("4_cj4wk")]([ExtResource("7_kw5d7"), ExtResource("5_htdqv"), ExtResource("7_kw5d7"), ExtResource("5_htdqv"), ExtResource("7_kw5d7")])
+
+[sub_resource type="Resource" id="Resource_g2pyy"]
+script = ExtResource("3_plf6x")
+duration = 10
+time_between_enemies = 1.5
+enemies = Array[ExtResource("4_cj4wk")]([ExtResource("7_kw5d7"), ExtResource("7_kw5d7"), ExtResource("7_kw5d7"), ExtResource("7_kw5d7"), ExtResource("7_kw5d7")])
+
+[resource]
+script = ExtResource("2_ael42")
+level_number = 2
+tech_level = 1
+route_curve = ExtResource("1_6rqki")
+waves = Array[ExtResource("3_plf6x")]([SubResource("Resource_iny3p"), SubResource("Resource_wry46"), SubResource("Resource_xlm8q"), SubResource("Resource_1q4wx"), SubResource("Resource_edu6g"), SubResource("Resource_rac6l"), SubResource("Resource_i1plo"), SubResource("Resource_7rwmn"), SubResource("Resource_6ugbp"), SubResource("Resource_dlptq"), SubResource("Resource_g2pyy")])
+preexisting_objects = ExtResource("1_ytsnk")

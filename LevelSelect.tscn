@@ -1,0 +1,107 @@
+[gd_scene load_steps=19 format=3 uid="uid://bipedifdwcrdx"]
+
+[ext_resource type="Script" path="res://Scripts/grass.gd" id="1_27jt5"]
+[ext_resource type="FontFile" uid="uid://butlmg0yfrfid" path="res://Assets/pixel.regular.ttf" id="1_am6xn"]
+[ext_resource type="Texture2D" uid="uid://cfuvl7d5qgyob" path="res://Assets/Grass/GrassTuft1.png" id="2_0uikn"]
+[ext_resource type="Script" path="res://Scripts/level_select.gd" id="2_188nq"]
+[ext_resource type="Resource" uid="uid://pfyso2yn4x0w" path="res://Levels/Level1.tres" id="3_31m8x"]
+[ext_resource type="Texture2D" uid="uid://hrbk6tnx727b" path="res://Assets/Grass/GrassTuft2.png" id="3_41m1h"]
+[ext_resource type="Texture2D" uid="uid://dx820ki46iwe3" path="res://Assets/Grass/GrassTuft3.png" id="4_01hjw"]
+[ext_resource type="Resource" uid="uid://clovi8hw7tdl1" path="res://Levels/Level2.tres" id="4_3cpnh"]
+[ext_resource type="Resource" uid="uid://lqnd3f3b1b2u" path="res://Levels/Level3.tres" id="5_ci04m"]
+[ext_resource type="Texture2D" uid="uid://d2m3sn0lccpo5" path="res://Assets/Grass/GrassTuft4.png" id="5_vxgas"]
+[ext_resource type="Resource" uid="uid://bo0ebut6d4jme" path="res://Levels/Level4.tres" id="6_ce877"]
+[ext_resource type="Texture2D" uid="uid://ejxs522v2dhb" path="res://Assets/Grass/GrassTuft5.png" id="6_hjc0w"]
+[ext_resource type="Texture2D" uid="uid://brlpbpjsqwj4v" path="res://Assets/BeeHive.png" id="9_0ht7b"]
+[ext_resource type="Script" path="res://Scripts/Buttons/level_button.gd" id="11_4g50u"]
+[ext_resource type="Texture2D" uid="uid://bg66nnf8odm2a" path="res://Assets/Sunflower.png" id="12_p88sk"]
+[ext_resource type="Texture2D" uid="uid://c1cgnfsu7al5f" path="res://Assets/AntHill.png" id="14_je06c"]
+[ext_resource type="Texture2D" uid="uid://bbir6txof2sbb" path="res://Assets/Enemies/Basic.png" id="16_f8oe0"]
+
+[sub_resource type="Theme" id="Theme_5myl6"]
+default_font = ExtResource("1_am6xn")
+default_font_size = 7
+
+[node name="LevelSelect" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = SubResource("Theme_5myl6")
+script = ExtResource("2_188nq")
+level1_parameters = ExtResource("3_31m8x")
+level2_parameters = ExtResource("4_3cpnh")
+level3_parameters = ExtResource("5_ci04m")
+level4_parameters = ExtResource("6_ce877")
+
+[node name="ZoomedPixelCamera" type="Camera2D" parent="."]
+offset = Vector2(180, 101)
+
+[node name="Grass" type="Node2D" parent="."]
+script = ExtResource("1_27jt5")
+images = Array[CompressedTexture2D]([ExtResource("2_0uikn"), ExtResource("3_41m1h"), ExtResource("4_01hjw"), ExtResource("5_vxgas"), ExtResource("6_hjc0w")])
+
+[node name="ColorRect" type="ColorRect" parent="Grass"]
+offset_right = 360.0
+offset_bottom = 202.0
+color = Color(0, 0.678431, 0, 0.419608)
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 20.0
+offset_top = 20.0
+offset_right = 340.0
+offset_bottom = 182.0
+
+[node name="Level1Button" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 30.0
+offset_right = 95.0
+offset_bottom = 60.0
+text = "Level 1
+Intro"
+icon = ExtResource("9_0ht7b")
+
+[node name="Level2Button" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 130.0
+offset_top = 30.0
+offset_right = 190.0
+offset_bottom = 60.0
+text = "Level 2
+Flowers"
+icon = ExtResource("12_p88sk")
+script = ExtResource("11_4g50u")
+level_number = 2
+
+[node name="Level3Button" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 225.0
+offset_top = 30.0
+offset_right = 288.0
+offset_bottom = 60.0
+text = "Level 3
+Ants"
+icon = ExtResource("14_je06c")
+script = ExtResource("11_4g50u")
+level_number = 3
+
+[node name="Level4Button" type="Button" parent="Panel"]
+layout_mode = 0
+offset_left = 35.0
+offset_top = 100.0
+offset_right = 98.0
+offset_bottom = 130.0
+text = "Level 4
+Invasion"
+icon = ExtResource("16_f8oe0")
+script = ExtResource("11_4g50u")
+level_number = 4
+
+[connection signal="pressed" from="Panel/Level1Button" to="." method="_on_level_1_button_pressed"]
+[connection signal="pressed" from="Panel/Level2Button" to="." method="_on_level_2_button_pressed"]
+[connection signal="pressed" from="Panel/Level3Button" to="." method="_on_level_3_button_pressed"]
+[connection signal="pressed" from="Panel/Level4Button" to="." method="_on_level_4_button_pressed"]

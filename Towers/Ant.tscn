@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://cmu676nbc01x6"]
+
+[ext_resource type="Script" path="res://Towers/ant.gd" id="1_1e2kg"]
+[ext_resource type="PackedScene" uid="uid://bqy8lc6taaxrl" path="res://Towers/Sunflower.tscn" id="2_0sqng"]
+[ext_resource type="Texture2D" uid="uid://drp33uc3o510" path="res://Assets/ant.png" id="2_vb8sb"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_t8hpk"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vlade"]
+
+[node name="Ant" type="Node2D"]
+script = ExtResource("1_1e2kg")
+sunflower = ExtResource("2_0sqng")
+
+[node name="EnemyCollision" type="Area2D" parent="."]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="EnemyCollision"]
+visible = false
+scale = Vector2(0.2, 0.2)
+shape = SubResource("CircleShape2D_t8hpk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.5708
+texture = ExtResource("2_vb8sb")
+
+[node name="FlowerCollision" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="FlowerCollision"]
+visible = false
+scale = Vector2(0.2, 0.2)
+shape = SubResource("CircleShape2D_t8hpk")
+
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
+scale = Vector2(0.2, 0.2)
+shape = SubResource("CircleShape2D_vlade")
