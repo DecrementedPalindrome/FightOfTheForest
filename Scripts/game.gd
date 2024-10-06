@@ -30,7 +30,8 @@ func _process(delta: float) -> void:
 		game_over()
 
 func all_enemies_defeated() -> bool:
-	return $Route.get_children().filter(func (child: Node2D): return child.get_class() == "PathFollow2D").size() == 0
+	print($Route.get_children().filter(func (child: Node2D): return (child.get_class() == "PathFollow2D" || child.get_class() == "Enemy")).size())
+	return $Route.get_children().filter(func (child: Node2D): return (child.get_class() == "PathFollow2D" || child.get_class() == "Enemy")).size() == 0
 
 func spawn_enemy(type: EnemyType) -> void:
 	var newEnemy:Enemy = (enemy.instantiate() as Enemy).with_type(type)
